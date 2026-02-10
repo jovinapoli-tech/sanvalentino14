@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Per il mio amore ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box {
+        background: rgba(255,255,255,0.9);
+        padding: 40px;
+        border-radius: 25px;
+        text-align: center;
+        width: 320px;
+        z-index: 10;
+    }
+
+    h1 {
+        color: #d1004b;
+    }
+
+    input, button {
+        width: 90%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 20px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        background: #d1004b;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ff3366;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .heart {
+        position: absolute;
+        animation: floatUp linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(110vh);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-20vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<audio id="song" src="die-for-you.mp3" loop></audio>
+
+<div class="box" id="loginBox">
+    <h1>💖 Accesso Segreto 💖</h1>
+    <input id="user" placeholder="Nome utente">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Entra</button>
+    <p id="err"></p>
+</div>
+
+<div class="box hidden" id="loveBox">
+    <h1>❤️ Benvenuta amore ❤️</h1>
+    <p>Questa canzone è per te</p>
+    <button onclick="playMusic()">▶ PLAY MUSICA 💖</button>
+</div>
+
+<script>
+    const song = document.getElementById("song");
+
+    function login() {
+        if (
+            document.getElementById("user").value === "amore" &&
+            document.getElementById("pass").value === "sanvalentino14"
+        ) {
+            document.getElementById("loginBox").classList.add("hidden");
+            document.getElementById("loveBox").classList.remove("hidden");
+        } else {
+            document.getElementById("err").innerText = "Credenziali errate 💔";
+        }
+    }
+
+    function playMusic() {
+        song.volume = 0.7;
+        song.play();
+        startHearts();
+    }
+
+    function startHearts() {
+        setInterval(() => {
+            for (let i = 0; i < 5; i++) {
+                const h = document.createElement("div");
+                h.className = "heart";
+                h.innerHTML = "❤️";
+                h.style.left = Math.random() * 100 + "vw";
+                h.style.fontSize = (30 + Math.random() * 50) + "px";
+                h.style.animationDuration = (4 + Math.random() * 4) + "s";
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 8000);
+            }
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
